@@ -11,19 +11,28 @@ find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(visualization_msgs REQUIRED)
 find_package(ns3_interfaces REQUIRED)
+find_package(sensor_msgs REQUIRED)
+find_package(airsim_interfaces REQUIRED)
 
-add_executable(ns3_drone_visualizer src/position_visualizer.cpp)
+add_executable(position src/position_visualizer.cpp src/utils.cpp)
 
-ament_target_dependencies(visualizer
+ament_target_dependencies(position
   rclcpp
   std_msgs
   ns3_interfaces
   visualization_msgs
+  sensor_msgs
+  airsim_interfaces
 )
 
 install(TARGETS
-        ns3_drone_visualizer
+        position
         RUNTIME DESTINATION lib/${PROJECT_NAME})
+
+install(PROGRAMS
+  scripts/position_csv.py  # Path to your Python script
+  DESTINATION lib/${PROJECT_NAME}
+)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
