@@ -3,3 +3,5 @@ install/
 log/
 .vs/
 3d/
+result/
+.env

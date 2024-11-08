@@ -167,7 +167,7 @@ int main(int argc, char* argv[]) {
 	// Force flush of the stdout buffer.
 	setvbuf(stdout, NULL, _IONBF, BUFSIZ);
 
-	// Initialize ROS2 first, this should be called exactly once per process.
+	// Initialize ROS2 
 	rclcpp::init(argc, argv);
 
 	// create the ns-3 nodes container

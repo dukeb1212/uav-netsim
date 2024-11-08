@@ -1,0 +1,63 @@
+services:
+  # NS3 simulator container
+  ns3-sim:
+    # Uncomment build field to rebuild the image if change
+    #build:
+    #  context: .
+    #  dockerfile: Dockerfile.ns3
+    image: ndminh1212/uav-gs:ns3-sim
+    container_name: ns3_sim
+    entrypoint: ["/bin/bash", "-c", "/ros_entrypoint.sh && /uav-gs/veth_setup.sh 2"]
+    volumes:
+      - ./ns3_veth_setup.sh:/uav-gs/veth_setup.sh
+    privileged: true
+    networks:
+      uav_br:
+        ipv4_address: 172.30.0.254
+    environment:
+      - LD_LIBRARY_PATH=/ns3/build/lib
+
+  # Ground station (UAV1) container
+  gs:
+    #build:
+    #  context: .
+    #  dockerfile: Dockerfile.uav
+    image: ndminh1212/uav-gs:uav
+    container_name: uav1
+    entrypoint: ["/bin/bash", "-c", "/ros_entrypoint.sh && /uav/veth_setup.sh 1"]
+    volumes:
+      - ./uav_veth_setup.sh:/uav/veth_setup.sh
+      - ./result/ground-station:/uav/result
+    network_mode: none
+    cap_add:
+      - NET_ADMIN
+
+  # Drone container
+  uav:
+    #build:
+    #  context: .
+    #  dockerfile: Dockerfile.uav
+    image: uav-img
+    container_name: uav2
+    entrypoint: ["/bin/bash", "-c", "/ros_entrypoint.sh && /uav/veth_setup.sh 2"]
+    build:
+      context: ./uav
+    volumes:
+      - ./uav_veth_setup.sh:/uav/veth_setup.sh
+      - "${AIRSIM_FOLDER_PATH}:/AirSim"
+      - ./result/uav:/uav/result
+    environment:
+      - WSL_HOST_IP=${WSL_HOST_IP}
+    networks:
+      uav_br:
+        ipv4_address: 172.30.0.2 
+    cap_add:
+      - NET_ADMIN
+
+networks:
+  uav_br:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.30.0.0/24
+          gateway: 172.30.0.1

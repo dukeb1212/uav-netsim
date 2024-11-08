@@ -1,0 +1,33 @@
+# Select ROS2 distro base image
+FROM ros:humble-ros-base-jammy
+
+# Install necessary packages
+RUN apt-get update && \
+    apt-get install -y build-essential cmake git python3 python3-pip iproute2 \
+    ros-$ROS_DISTRO-geographic-msgs && \
+    apt-get clean
+
+# Install ns3
+COPY ./ns-3-dev /ns3
+
+# Build ns-3
+RUN cd /ns3 && \
+    ./ns3 configure --enable-examples && \
+    ./ns3 build
+
+# ROS2 source code
+COPY ./src/airsim_interfaces /uav-gs/src/airsim_interfaces
+COPY ./src/ns3_interfaces /uav-gs/src/ns3_interfaces
+COPY ./src/uav_gs /uav-gs/src/uav_gs
+
+# Build ROS2 package
+RUN cd /uav-gs && \
+    . /opt/ros/humble/setup.sh && \
+    colcon build && \
+    . install/setup.sh
+
+# Set the default workspace
+WORKDIR /uav-gs
+
+CMD []
+
