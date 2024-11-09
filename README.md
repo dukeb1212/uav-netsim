@@ -4,8 +4,7 @@ UAV NetSim is an open-source project that integrates Unreal Engine 4 (UE4), Netw
 
 UAV NetSim aims to support researchers in testing communication protocols and network performance under varied environmental conditions, enabling the development and experimentation of UAV control algorithms and network communication—all within a simulated indoor environment.
 
-![Build Status](https://img.shields.io/github/workflow/status/username/repo-name/build) 
-![License](https://img.shields.io/github/license/username/repo-name)
+
 
 ## Table of Contents  
 
@@ -91,3 +90,49 @@ After built, copy the `settings.json` file into `~/Documents/AirSim` directory.
    ```bash
    route add 172.30.0.0 MASK 255.255.255.0 <WSL_IP_ADDR> METRIC 1 -p
 
+#### 3.2. Set up AirSim Setting
+
+`settings.json` is the default settings file of AirSim. For more information about every parameter inside AirSim settings please visit the official page at https://microsoft.github.io/AirSim/settings/  
+
+- **(WSL User)** For the basic scenario, add these two value into `settings.json` at the vehicle's settings after `TcpPort`. Change the values to real IP addresses.
+
+   ```json
+   "LocalHostIp": "wsl-ip-addr",
+   "ControlIp": "linux-eth0-addr",
+
+## Usage
+
+- Create a new Unreal Engine project and add the `Plugins` directory into the project's directory. (Or use the Blocks project under the directory `AirSim/Unreal/Environments/Blocks/`)
+- Build and run the project.
+- Inside Unreal Editor UI, go to Windows -> World Settings and change the game mode to AirSimGameMode.
+
+### 1. With Docker
+- Inside `uav-netsim` directory, run the command:
+
+	```bash
+	sudo ./docker_setup.sh
+
+- The command above will run the `docker-compose.yml` setup and set up the network inside each container.
+- To vefiry the network is working, try to ping between 2 UAV containers. The default name is `uav1`, `uav2`.
+- First exec inside the container, then run the ping command. For example, in `uav1` container:
+	```bash
+	docker exec -it uav1 /bin/bash
+	ping 10.0.0.4
+- The IP addresses of UAV containers will start at `10.0.0.1` for `uav1`, then `10.0.0.4` for `uav2` and so on.
+
+- For more specific test cases, checkout the [Wiki](https://github.com/dukeb1212/uav-netsim/wiki) page.
+
+### 2. Build from source
+If you want to build the ROS 2 packages manually, follow the tutorial from Wiki: [Build from source](https://github.com/dukeb1212/uav-netsim/wiki/Build-from-source)
+
+** **Prerequisites**: ROS 2 Humble, ns-3-dev
+
+Make sure to install all the necessary packages above.
+
+## Contributing
+Contributions are welcome! Please follow these guidelines:
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-name`).
+3. Commit your changes (`git commit -m 'Add feature'`).
+4. Push to the branch (`git push origin feature-name`).
+5. Open a pull request.

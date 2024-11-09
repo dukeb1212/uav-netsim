@@ -23,8 +23,8 @@ find_package(rclpy REQUIRED)
 
 
 # add ns3 libraries
-include_directories(src /mnt/d/ros_ue5_ns3/ns-3-allinone/ns-3.42/build/include)
-link_directories(/mnt/d/ros_ue5_ns3/ns-3-allinone/ns-3.42/build/lib)
+include_directories(src ${NS3_DIR}/build/include)
+link_directories(${NS3_DIR}/build/lib)
 
 add_executable(uav_gs_cpp src/uav_gs.cpp src/drone.cpp src/ground_station.cpp src/utils.cpp)
 
@@ -41,14 +41,14 @@ ament_target_dependencies(uav_gs_cpp
 
 # add link libraries
 target_link_libraries(uav_gs_cpp
-  ns3.42-core-default
-  ns3.42-network-default
-  ns3.42-internet-default
-  ns3.42-wifi-default
-  ns3.42-mobility-default
-  ns3.42-tap-bridge-default
-  ns3.42-internet-apps-default
-  ns3.42-aodv-default
+  ns3-dev-core-default
+  ns3-dev-network-default
+  ns3-dev-internet-default
+  ns3-dev-wifi-default
+  ns3-dev-mobility-default
+  ns3-dev-tap-bridge-default
+  ns3-dev-internet-apps-default
+  ns3-dev-aodv-default
 )
 
 install(TARGETS
