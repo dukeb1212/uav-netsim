@@ -1,0 +1,40 @@
+{
+  "SettingsVersion": 1.2,
+  "SimMode": "Multirotor",
+  "ClockType": "SteppableClock",
+  "Vehicles": {
+    "uav1": {
+      "VehicleType": "PX4Multirotor",
+      "UseSerial": false,
+      "LockStep": true,
+      "UseTcp": true,
+      "TcpPort": 4560,
+      "LocalHostIp": "172.21.64.1",
+      "ControlIp": "172.21.78.129",
+      "ControlPortLocal": 14540,
+      "ControlPortRemote": 14580,
+      "Sensors": {
+        "Barometer": {
+          "SensorType": 1,
+          "Enabled": true,
+          "PressureFactorSigma": 0.0001825
+        }
+      },
+      "X": -3.5,
+      "Y": 3.5,
+      "Z": 0,
+      "Parameters": {
+        "NAV_RCL_ACT": 0,
+        "NAV_DLL_ACT": 0,
+        "LPE_LAT": 21.016161,
+        "LPE_LON": 105.845016,
+        "LPE_ALT": 0.0
+      }
+    }
+  },
+  "OriginGeopoint": {
+    "Latitude": 21.016161,
+    "Longitude": 105.845016,
+    "Altitude": 0
+  }
+}
