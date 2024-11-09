@@ -44,7 +44,7 @@ services:
       context: ./uav
     volumes:
       - ./uav_veth_setup.sh:/uav/veth_setup.sh
-      - "${AIRSIM_FOLDER_PATH}:/AirSim"
+      - "${AIRSIM_DIR}:/AirSim"
       - ./result/uav:/uav/result
     environment:
       - WSL_HOST_IP=${WSL_HOST_IP}
@@ -53,6 +53,31 @@ services:
         ipv4_address: 172.30.0.2 
     cap_add:
       - NET_ADMIN
+    depends_on:
+      px4:
+        condition: service_healthy
+
+  # SITL container
+  px4:
+    image: px4io/px4-dev-base-jammy
+    container_name: px4_sitl
+    volumes:
+      - ${PX4_DIR}:/PX4-Autopilot/:rw
+      - /tmp/.X11-unix:/tmp/.X11-unix:ro
+      - ./px4_script.sh:/px4_script.sh
+    environment:
+      - LOCAL_USER_ID="$(id -u)"
+      - DISPLAY=${WSL_HOST_IP}:0
+      - PX4_SIM_HOST_ADDR=${WSL_HOST_IP}
+    network_mode: host
+    privileged: true
+    entrypoint: ["/bin/bash", "-c", "/px4_script.sh 1"]
+    healthcheck:
+      test: ["CMD", "test", "-d", "/PX4-Autopilot/build/px4_sitl_default/instance_0"]
+      interval: 10s
+      retries: 5
+      start_period: 10s
+      timeout: 5s
 
 networks:
   uav_br:

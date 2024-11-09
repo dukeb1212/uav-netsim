@@ -93,7 +93,7 @@ After built, copy the `settings.json` file into `~/Documents/AirSim` directory.
 
 The default settings file of AirSim is `settings.json`. For more information about every parameter inside AirSim settings please visit the official page at https://microsoft.github.io/AirSim/settings/  
 
-- **(WSL User)** For the basic scenario, add these two value into `settings.json` at the vehicle's settings after `TcpPort`. Change the values to real IP addresses.
+- **(WSL User)** For the basic scenario, add these two values into `settings.json` at the vehicle's settings after `TcpPort`. Change the values to real IP addresses.
 
    ```json
    "LocalHostIp": "wsl-ip-addr",
