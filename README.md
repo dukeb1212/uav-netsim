@@ -48,7 +48,7 @@ This project is developed and tested on Ubuntu 22.04 Jammy. Other Ubuntu OS vers
   
   ```bash
   cd /UnrealEngine
-  ./Setup.sh
+  . /Setup.sh
 
 - Run the `GenerateProjectFiles.sh` to create the default project file for Unreal Editor.
   
@@ -59,3 +59,10 @@ This project is developed and tested on Ubuntu 22.04 Jammy. Other Ubuntu OS vers
 
   ```bash
   Engine/Binaries/Linux/UnrealEditor
+
+### 2. Install AirSim plugin for Unreal Engine  
+
+Follow the instruction from Microsoft to learn how to install AirSim and build on different OS at https://microsoft.github.io/AirSim/
+After built, copy the `settings.json` file into `~/Documents` directory.
+
+### 3. Install UAV NetSim
