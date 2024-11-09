@@ -12,7 +12,6 @@ UAV NetSim aims to support researchers in testing communication protocols and ne
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Features  
 
@@ -92,7 +91,7 @@ After built, copy the `settings.json` file into `~/Documents/AirSim` directory.
 
 #### 3.2. Set up AirSim Setting
 
-`settings.json` is the default settings file of AirSim. For more information about every parameter inside AirSim settings please visit the official page at https://microsoft.github.io/AirSim/settings/  
+The default settings file of AirSim is `settings.json`. For more information about every parameter inside AirSim settings please visit the official page at https://microsoft.github.io/AirSim/settings/  
 
 - **(WSL User)** For the basic scenario, add these two value into `settings.json` at the vehicle's settings after `TcpPort`. Change the values to real IP addresses.
 
@@ -102,7 +101,7 @@ After built, copy the `settings.json` file into `~/Documents/AirSim` directory.
 
 ## Usage
 
-- Create a new Unreal Engine project and add the `Plugins` directory into the project's directory. (Or use the Blocks project under the directory `AirSim/Unreal/Environments/Blocks/`)
+- Create a new Unreal Engine project and add the `Plugins` directory into the project's directory. (Or use the `Blocks` project under the directory `AirSim/Unreal/Environments/Blocks/`)
 - Build and run the project.
 - Inside Unreal Editor UI, go to Windows -> World Settings and change the game mode to AirSimGameMode.
 

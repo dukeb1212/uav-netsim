@@ -9,8 +9,6 @@
       "LockStep": true,
       "UseTcp": true,
       "TcpPort": 4560,
-      "LocalHostIp": "172.21.64.1",
-      "ControlIp": "172.21.78.129",
       "ControlPortLocal": 14540,
       "ControlPortRemote": 14580,
       "Sensors": {
