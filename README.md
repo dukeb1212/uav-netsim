@@ -36,11 +36,13 @@ The current version of Unreal Engine supported is UE4.27. There will be a migrat
 
 #### 1.2. Ubuntu  
 
-This project is developed and tested on Ubuntu 22.04 Jammy. Other Ubuntu OS versions (Focal, Noble) can be used but might have unexpected problems.
-- Go to the Unreal Engine repository https://github.com/EpicGames/UnrealEngine and clone the repository.  
-*** First you may have to link the GitHub account to the Epic Games account at https://www.epicgames.com/account/connections ***  
-*** Also create and add SSH key of your computer to GitHub in the Setting since GitHub remove the password method ***  
-  
+This project is developed and tested on Ubuntu 22.04 Jammy. Other Ubuntu OS versions (Focal, Noble) can be used but might have unexpected problems.  
+
+*First you may have to link the GitHub account to the Epic Games account at https://www.epicgames.com/account/connections* 
+
+*Also create and add SSH key of your computer to GitHub in the Setting since GitHub remove the password method*
+
+- Go to the Unreal Engine repository https://github.com/EpicGames/UnrealEngine and clone the repository.
   ```bash
   git clone -b 4.27 git@github.com:EpicGames/UnrealEngine.git
   
@@ -62,7 +64,30 @@ This project is developed and tested on Ubuntu 22.04 Jammy. Other Ubuntu OS vers
 
 ### 2. Install AirSim plugin for Unreal Engine  
 
-Follow the instruction from Microsoft to learn how to install AirSim and build on different OS at https://microsoft.github.io/AirSim/
-After built, copy the `settings.json` file into `~/Documents` directory.
+Follow the instruction from Microsoft to learn how to install AirSim and build on different OS at https://microsoft.github.io/AirSim/  
+After built, copy the `settings.json` file into `~/Documents/AirSim` directory.
 
 ### 3. Install UAV NetSim
+
+- Clone the repository.
+  
+  ```bash
+  git clone https://github.com/dukeb1212/uav-netsim.git
+  cd uav-netsim/
+
+#### 3.1. Set up the environment variables
+
+- Create `.env` file inside the `uav-netsim/` directory.
+  
+  ```env
+  AIRSIM_FOLDER_PATH=/path/to/AirSim
+  WSL_HOST_IP=<WSL-IP-Address> # For WSL user
+
+*To find the WSL IP address, open command prompt in Windows and use `ipconfig`, find the IPv4 address of the WSL interface.*
+
+ - **(For WSL user only)** Set up network route in Windows.
+   Open `Command Prompt` in Administrator mode and run the command *(change the WSL_IP_ADDR to real WSL IP address)*.
+   
+   ```bash
+   route add 172.30.0.0 MASK 255.255.255.0 <WSL_IP_ADDR> METRIC 1 -p
+
