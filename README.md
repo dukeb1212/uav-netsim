@@ -65,6 +65,13 @@ This project is developed and tested on Ubuntu 22.04 Jammy. Other Ubuntu OS vers
 Follow the instruction from Microsoft to learn how to install AirSim and build on different OS at https://microsoft.github.io/AirSim/  
 After built, copy the `settings.json` file into `~/Documents/AirSim` directory.
 
+#### 2.1. Install PX4 SITL
+PX4-Autopilot provides a software to perform Sofware in the Loop (SITL) vehicles (car, UAV, etc) simulation.
+
+- Clone the repository (current tested version is v1.13).
+  ```bash
+  git clone -b release/1.13 --recurse-submodules https://github.com/PX4/PX4-Autopilot.git
+
 ### 3. Install UAV NetSim
 
 - Clone the repository.
@@ -78,7 +85,8 @@ After built, copy the `settings.json` file into `~/Documents/AirSim` directory.
 - Create `.env` file inside the `uav-netsim/` directory.
   
   ```env
-  AIRSIM_FOLDER_PATH=/path/to/AirSim
+  AIRSIM_DIR=/path/to/AirSim
+  PX4_DIR=/path/to/PX4-Autopilot
   WSL_HOST_IP=<WSL-IP-Address> # For WSL user
 
 *To find the WSL IP address, open command prompt in Windows and use `ipconfig`, find the IPv4 address of the WSL interface.*
@@ -103,7 +111,8 @@ The default settings file of AirSim is `settings.json`. For more information abo
 
 - Create a new Unreal Engine project and add the `Plugins` directory into the project's directory. (Or use the `Blocks` project under the directory `AirSim/Unreal/Environments/Blocks/`)
 - Build and run the project.
-- Inside Unreal Editor UI, go to Windows -> World Settings and change the game mode to AirSimGameMode.
+- Inside Unreal Editor UI, go to `Windows -> World Settings` and change the game mode to AirSimGameMode.
+- Click the `Play` button.
 
 ### 1. With Docker
 - Inside `uav-netsim` directory, run the command:
@@ -111,11 +120,13 @@ The default settings file of AirSim is `settings.json`. For more information abo
 	```bash
 	sudo ./docker_setup.sh
 
-- The command above will run the `docker-compose.yml` setup and set up the network inside each container.
+- The command above will run the `docker-compose.yml` setup and set up the network inside each container.  
+  **_You may have to wait about 20-30 seconds for the setup process to complete._**
 - To vefiry the network is working, try to ping between 2 UAV containers. The default name is `uav1`, `uav2`.
 - First exec inside the container, then run the ping command. For example, in `uav1` container:
 	```bash
 	docker exec -it uav1 /bin/bash
+	ip a
 	ping 10.0.0.4
 - The IP addresses of UAV containers will start at `10.0.0.1` for `uav1`, then `10.0.0.4` for `uav2` and so on.
 
