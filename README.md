@@ -109,7 +109,7 @@ The default settings file of AirSim is `settings.json`. For more information abo
 
 ## Usage
 
-- Create a new Unreal Engine project and add the `Plugins` directory into the project's directory. (Or use the `Blocks` project under the directory `AirSim/Unreal/Environments/Blocks/`)
+- Create a new Unreal Engine project and add the `AirSim/Unreal/Plugins` directory into the project's directory. (Or use the `Blocks` project under the directory `AirSim/Unreal/Environments/Blocks/`)
 - Build and run the project.
 - Inside Unreal Editor UI, go to `Windows -> World Settings` and change the game mode to AirSimGameMode.
 - Click the `Play` button.
