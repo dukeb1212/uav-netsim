@@ -130,6 +130,10 @@ The default settings file of AirSim is `settings.json`. For more information abo
 	ping 10.0.0.4
 - The IP addresses of UAV containers will start at `10.0.0.1` for `uav1`, then `10.0.0.4` for `uav2` and so on.
 
+- To shutdown UAV NetSim, run this command from the directory `uav-netsim` in terminal.
+    ```bash
+    docker compose down
+
 - For more specific test cases, checkout the [Wiki](https://github.com/dukeb1212/uav-netsim/wiki) page.
 
 ### 2. Build from source
