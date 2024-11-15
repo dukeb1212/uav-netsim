@@ -48,12 +48,12 @@ This project is developed and tested on Ubuntu 22.04 Jammy. Other Ubuntu OS vers
   
   ```bash
   cd UnrealEngine/
-  . ./Setup.sh
+  ./Setup.sh
 
 - Run the `GenerateProjectFiles.sh` to create the default project file for Unreal Editor.
   
   ```bash
-  . ./GenerateProjectFiles.sh
+  ./GenerateProjectFiles.sh
 
 - Run the Unreal Editor inside terminal.
 
