@@ -47,13 +47,13 @@ This project is developed and tested on Ubuntu 22.04 Jammy. Other Ubuntu OS vers
 - Go to the source directory and run the Setup.sh script to set up the install environment.
   
   ```bash
-  cd /UnrealEngine
-  . /Setup.sh
+  cd UnrealEngine/
+  . ./Setup.sh
 
 - Run the `GenerateProjectFiles.sh` to create the default project file for Unreal Editor.
   
   ```bash
-  . /GenerateProjectFiles.sh
+  . ./GenerateProjectFiles.sh
 
 - Run the Unreal Editor inside terminal.
 
