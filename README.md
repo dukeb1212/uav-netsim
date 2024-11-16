@@ -55,10 +55,23 @@ This project is developed and tested on Ubuntu 22.04 Jammy. Other Ubuntu OS vers
   ```bash
   ./GenerateProjectFiles.sh
 
-- Run the Unreal Editor inside terminal.
+- Build Unreal Engine.
 
   ```bash
-  Engine/Binaries/Linux/UnrealEditor
+  make  
+
+*** **_Known Error_**: 
+> WARNING: Exception while generating include data for UE4Editor: Platform Linux is not a valid platform to build. Check that the SDK is installed properly. 
+
+- **(Troubleshoot)** If you encounter the error above, follow these steps to fix it.
+  - Go to this url and download the toolchain compatible with your UE version. [Native Toolchain UE](https://dev.epicgames.com/documentation/en-us/unreal-engine/native-toolchain?application_version=4.27)
+  - Unzip it and replace the toolchain inside `UnrealEngine/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/`.
+  - Rerun the `GenerateProjectFiles.sh` script and `make` command.
+
+- Run the Unreal Editor inside terminal. _(If using UE5 or above, the name should be_ `UnrealEditor` _instead)_.
+
+  ```bash
+  Engine/Binaries/Linux/UE4Editor
 
 ### 2. Install AirSim plugin for Unreal Engine  
 
