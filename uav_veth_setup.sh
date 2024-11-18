@@ -31,6 +31,7 @@ echo "New IP addr of veth_uav is $veth_uav"
 sleep 5
 if [ "$airsim" = "true" ]; then
   cd /AirSim/ros2
+  . /opt/ros/$ROS_DISTRO/setup.sh
   colcon build
   . install/setup.sh
   ros2 launch airsim_ros_pkgs airsim_node.launch.py output:=screen host:=$WSL_HOST_IP
