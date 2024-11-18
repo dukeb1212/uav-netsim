@@ -33,7 +33,7 @@ if [ "$airsim" = "true" ]; then
   cd /AirSim/ros2
   #. /opt/ros/$ROS_DISTRO/setup.sh
   #colcon build
-  #. install/setup.sh
+  . install/setup.sh
   ros2 launch airsim_ros_pkgs airsim_node.launch.py output:=screen host:=$WSL_HOST_IP
 fi
 
