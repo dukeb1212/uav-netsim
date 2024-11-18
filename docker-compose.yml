@@ -37,7 +37,7 @@ services:
     #build:
     #  context: .
     #  dockerfile: Dockerfile.uav
-    image: uav-img
+    image: ndminh1212/uav-gs:uav
     container_name: uav2
     entrypoint: ["/bin/bash", "-c", "/ros_entrypoint.sh && /uav/veth_setup.sh 2"]
     build:
@@ -66,10 +66,11 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix:ro
       - ./px4_script.sh:/px4_script.sh
     environment:
-      - LOCAL_USER_ID="$(id -u)"
+      - GIT_SAFE_DIRECTORY=/PX4-Autopilot
       - DISPLAY=${WSL_HOST_IP}:0
       - PX4_SIM_HOST_ADDR=${WSL_HOST_IP}
     network_mode: host
+    user: "${UID}:${GID}"
     privileged: true
     entrypoint: ["/bin/bash", "-c", "/px4_script.sh 1"]
     healthcheck:
