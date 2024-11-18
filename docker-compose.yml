@@ -16,6 +16,9 @@ services:
         ipv4_address: 172.30.0.254
     environment:
       - LD_LIBRARY_PATH=/ns3/build/lib
+    depends_on:
+      px4:
+        condition: service_healthy
 
   # Ground station (UAV1) container
   gs:
@@ -31,6 +34,9 @@ services:
     network_mode: none
     cap_add:
       - NET_ADMIN
+    depends_on:
+      px4:
+        condition: service_healthy
 
   # Drone container
   uav:
@@ -71,9 +77,8 @@ services:
       - PX4_SIM_HOST_ADDR=${WSL_HOST_IP}
     network_mode: host
     privileged: true
-    #entrypoint: ["/bin/bash", "-c", "/px4_script.sh 1"]
+    entrypoint: ["/bin/bash", "-c", "/px4_script.sh 1"]
     working_dir: /src/PX4-Autopilot
-    entrypoint: ["/bin/bash", "-c", "make px4_sitl none_iris"]
     healthcheck:
       test: ["CMD", "test", "-d", "/src/PX4-Autopilot/build/px4_sitl_default/instance_0"]
       interval: 10s
