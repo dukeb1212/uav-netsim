@@ -29,7 +29,7 @@ ip link set "veth_uav"$1 up
 echo "New IP addr of veth_uav is $veth_uav"
 
 sleep 5
-if (( "$airsim" = "true"  )); then
+if [ "$airsim" = "true" ]; then
   cd /AirSim/ros2
   colcon build
   . install/setup.sh
