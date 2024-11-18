@@ -24,7 +24,7 @@ services:
     #  dockerfile: Dockerfile.uav
     image: ndminh1212/uav-gs:uav
     container_name: uav1
-    entrypoint: ["/bin/bash", "-c", "/ros_entrypoint.sh && /uav/veth_setup.sh 1"]
+    entrypoint: ["/bin/bash", "-c", "/ros_entrypoint.sh && /uav/veth_setup.sh 1 false"]
     volumes:
       - ./uav_veth_setup.sh:/uav/veth_setup.sh
       - ./result/ground-station:/uav/result
@@ -39,7 +39,7 @@ services:
     #  dockerfile: Dockerfile.uav
     image: ndminh1212/uav-gs:uav
     container_name: uav2
-    entrypoint: ["/bin/bash", "-c", "/ros_entrypoint.sh && /uav/veth_setup.sh 2"]
+    entrypoint: ["/bin/bash", "-c", "/ros_entrypoint.sh && /uav/veth_setup.sh 2 true"]
     build:
       context: ./uav
     volumes:
@@ -62,19 +62,18 @@ services:
     image: px4io/px4-dev-base-jammy
     container_name: px4_sitl
     volumes:
-      - ${PX4_DIR}:/PX4-Autopilot/:rw
+      - ${PX4_DIR}:/src/PX4-Autopilot/:rw
       - /tmp/.X11-unix:/tmp/.X11-unix:ro
       - ./px4_script.sh:/px4_script.sh
     environment:
-      - GIT_SAFE_DIRECTORY=/PX4-Autopilot
+      - GIT_SAFE_DIRECTORY=/src/PX4-Autopilot
       - DISPLAY=${WSL_HOST_IP}:0
       - PX4_SIM_HOST_ADDR=${WSL_HOST_IP}
     network_mode: host
-    user: "${UID}:${GID}"
     privileged: true
     entrypoint: ["/bin/bash", "-c", "/px4_script.sh 1"]
     healthcheck:
-      test: ["CMD", "test", "-d", "/PX4-Autopilot/build/px4_sitl_default/instance_0"]
+      test: ["CMD", "test", "-d", "/src/PX4-Autopilot/build/px4_sitl_default/instance_0"]
       interval: 10s
       retries: 5
       start_period: 10s

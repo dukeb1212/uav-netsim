@@ -5,6 +5,8 @@ sleep 10
 
 echo "Assigning IP address to veth_uav interface"
 
+airsim=$2
+
 # IP addresses calculate function. The IP address range will be from 10.0.0.1 to 10.127.254.254
 calculate_ips() {
   local i="$1"
@@ -27,10 +29,12 @@ ip link set "veth_uav"$1 up
 echo "New IP addr of veth_uav is $veth_uav"
 
 sleep 5
-cd /AirSim/ros2
-colcon build
-. install/setup.sh
-ros2 launch airsim_ros_pkgs airsim_node.launch.py output:=screen host:=$WSL_HOST_IP
+if (( $airsim )); then
+  cd /AirSim/ros2
+  colcon build
+  . install/setup.sh
+  ros2 launch airsim_ros_pkgs airsim_node.launch.py output:=screen host:=$WSL_HOST_IP
+fi
 
 # Source the ROS2 setup for future use
 cd /uav
