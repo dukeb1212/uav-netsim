@@ -41,5 +41,6 @@ fi
 cd /uav
 . install/setup.sh
 
+
 # Keep the container alive
 sleep infinity
